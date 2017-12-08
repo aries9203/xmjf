@@ -38,10 +38,12 @@ public void after() throws Exception {
 * 
 */ 
 @Test
-public void testQueryBasUserById() throws Exception { 
+public void saveQueryBasUserById() throws Exception {
 //TODO: Test goes here...
-    BasUser basUser = iBasUserService.queryBasUserById(1);
-    System.out.println(basUser);
+   /* BasUser basUser = iBasUserService.queryBasUserById(1);
+    System.out.println(basUser);*/
+
+    iBasUserService.saveBasUser("18221049759","123456");
 
 } 
 

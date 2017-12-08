@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.shsxt.xm.server.db.dao.BasUserSecurityMapper" >
+<mapper namespace="com.shsxt.xm.server.db.dao.BasUserSecurityDao" >
   <resultMap id="BaseResultMap" type="com.shsxt.xm.api.po.BasUserSecurity" >
     <id column="id" property="id" jdbcType="INTEGER" />
     <result column="user_id" property="userId" jdbcType="INTEGER" />
@@ -18,27 +18,13 @@
     id, user_id, payment_password, pattern_lock, realname, identify_card, phone_status, 
     email_status, realname_status, email, verify_time
   </sql>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+  <select id="queryById" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />
     from bas_user_security
     where id = #{id,jdbcType=INTEGER}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
-    delete from bas_user_security
-    where id = #{id,jdbcType=INTEGER}
-  </delete>
   <insert id="insert" parameterType="com.shsxt.xm.api.po.BasUserSecurity" >
-    insert into bas_user_security (id, user_id, payment_password, 
-      pattern_lock, realname, identify_card, 
-      phone_status, email_status, realname_status, 
-      email, verify_time)
-    values (#{id,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{paymentPassword,jdbcType=VARCHAR}, 
-      #{patternLock,jdbcType=VARCHAR}, #{realname,jdbcType=VARCHAR}, #{identifyCard,jdbcType=VARCHAR}, 
-      #{phoneStatus,jdbcType=INTEGER}, #{emailStatus,jdbcType=INTEGER}, #{realnameStatus,jdbcType=INTEGER}, 
-      #{email,jdbcType=VARCHAR}, #{verifyTime,jdbcType=TIMESTAMP})
-  </insert>
-  <insert id="insertSelective" parameterType="com.shsxt.xm.api.po.BasUserSecurity" >
     insert into bas_user_security
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -111,7 +97,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.shsxt.xm.api.po.BasUserSecurity" >
+  <update id="update" parameterType="com.shsxt.xm.api.po.BasUserSecurity" >
     update bas_user_security
     <set >
       <if test="userId != null" >
@@ -145,20 +131,6 @@
         verify_time = #{verifyTime,jdbcType=TIMESTAMP},
       </if>
     </set>
-    where id = #{id,jdbcType=INTEGER}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="com.shsxt.xm.api.po.BasUserSecurity" >
-    update bas_user_security
-    set user_id = #{userId,jdbcType=INTEGER},
-      payment_password = #{paymentPassword,jdbcType=VARCHAR},
-      pattern_lock = #{patternLock,jdbcType=VARCHAR},
-      realname = #{realname,jdbcType=VARCHAR},
-      identify_card = #{identifyCard,jdbcType=VARCHAR},
-      phone_status = #{phoneStatus,jdbcType=INTEGER},
-      email_status = #{emailStatus,jdbcType=INTEGER},
-      realname_status = #{realnameStatus,jdbcType=INTEGER},
-      email = #{email,jdbcType=VARCHAR},
-      verify_time = #{verifyTime,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>

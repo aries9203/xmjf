@@ -17,7 +17,7 @@ public class TestSms {
         req.setSmsType("normal");
         req.setSmsFreeSignName("小马金服");
         req.setSmsParamString("{\"code\":\"8888\",\"product\":\"xmjf\"}");
-        req.setRecNum("1822104975");
+        req.setRecNum("18661197721");
         req.setSmsTemplateCode("SMS_115100107");
         AlibabaAliqinFcSmsNumSendResponse rsp = null;
         try {

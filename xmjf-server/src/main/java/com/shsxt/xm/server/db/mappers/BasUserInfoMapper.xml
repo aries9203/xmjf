@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.shsxt.xm.server.db.dao.BasUserInfoMapper" >
+<mapper namespace="com.shsxt.xm.server.db.dao.BasUserInfoDao" >
   <resultMap id="BaseResultMap" type="com.shsxt.xm.api.po.BasUserInfo" >
     <id column="id" property="id" jdbcType="INTEGER" />
     <result column="user_id" property="userId" jdbcType="INTEGER" />
@@ -30,35 +30,13 @@
     birth_address, idcard1, idcard2, sex, remark, invite_code, qq_open_id, qq_nickname, 
     we_chat_open_id, we_chat_nickname, blog_open_id, blog_nickname, photo, cash_limit
   </sql>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+  <select id="queryById" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />
     from bas_user_info
     where id = #{id,jdbcType=INTEGER}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
-    delete from bas_user_info
-    where id = #{id,jdbcType=INTEGER}
-  </delete>
   <insert id="insert" parameterType="com.shsxt.xm.api.po.BasUserInfo" >
-    insert into bas_user_info (id, user_id, birthday, 
-      customer_type, edu, company_address, 
-      home_address, current_address, birth_address, 
-      idcard1, idcard2, sex, 
-      remark, invite_code, qq_open_id, 
-      qq_nickname, we_chat_open_id, we_chat_nickname, 
-      blog_open_id, blog_nickname, photo, 
-      cash_limit)
-    values (#{id,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{birthday,jdbcType=TIMESTAMP}, 
-      #{customerType,jdbcType=INTEGER}, #{edu,jdbcType=VARCHAR}, #{companyAddress,jdbcType=VARCHAR}, 
-      #{homeAddress,jdbcType=VARCHAR}, #{currentAddress,jdbcType=VARCHAR}, #{birthAddress,jdbcType=VARCHAR}, 
-      #{idcard1,jdbcType=VARCHAR}, #{idcard2,jdbcType=VARCHAR}, #{sex,jdbcType=INTEGER}, 
-      #{remark,jdbcType=VARCHAR}, #{inviteCode,jdbcType=VARCHAR}, #{qqOpenId,jdbcType=VARCHAR}, 
-      #{qqNickname,jdbcType=VARCHAR}, #{weChatOpenId,jdbcType=VARCHAR}, #{weChatNickname,jdbcType=VARCHAR}, 
-      #{blogOpenId,jdbcType=VARCHAR}, #{blogNickname,jdbcType=VARCHAR}, #{photo,jdbcType=VARCHAR}, 
-      #{cashLimit,jdbcType=INTEGER})
-  </insert>
-  <insert id="insertSelective" parameterType="com.shsxt.xm.api.po.BasUserInfo" >
     insert into bas_user_info
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -197,7 +175,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.shsxt.xm.api.po.BasUserInfo" >
+  <update id="update" parameterType="com.shsxt.xm.api.po.BasUserInfo" >
     update bas_user_info
     <set >
       <if test="userId != null" >
@@ -264,31 +242,6 @@
         cash_limit = #{cashLimit,jdbcType=INTEGER},
       </if>
     </set>
-    where id = #{id,jdbcType=INTEGER}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="com.shsxt.xm.api.po.BasUserInfo" >
-    update bas_user_info
-    set user_id = #{userId,jdbcType=INTEGER},
-      birthday = #{birthday,jdbcType=TIMESTAMP},
-      customer_type = #{customerType,jdbcType=INTEGER},
-      edu = #{edu,jdbcType=VARCHAR},
-      company_address = #{companyAddress,jdbcType=VARCHAR},
-      home_address = #{homeAddress,jdbcType=VARCHAR},
-      current_address = #{currentAddress,jdbcType=VARCHAR},
-      birth_address = #{birthAddress,jdbcType=VARCHAR},
-      idcard1 = #{idcard1,jdbcType=VARCHAR},
-      idcard2 = #{idcard2,jdbcType=VARCHAR},
-      sex = #{sex,jdbcType=INTEGER},
-      remark = #{remark,jdbcType=VARCHAR},
-      invite_code = #{inviteCode,jdbcType=VARCHAR},
-      qq_open_id = #{qqOpenId,jdbcType=VARCHAR},
-      qq_nickname = #{qqNickname,jdbcType=VARCHAR},
-      we_chat_open_id = #{weChatOpenId,jdbcType=VARCHAR},
-      we_chat_nickname = #{weChatNickname,jdbcType=VARCHAR},
-      blog_open_id = #{blogOpenId,jdbcType=VARCHAR},
-      blog_nickname = #{blogNickname,jdbcType=VARCHAR},
-      photo = #{photo,jdbcType=VARCHAR},
-      cash_limit = #{cashLimit,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.shsxt.xm.server.db.dao.BusAccountMapper" >
+<mapper namespace="com.shsxt.xm.server.db.dao.BusAccountDao" >
   <resultMap id="BaseResultMap" type="com.shsxt.xm.api.po.BusAccount" >
     <id column="id" property="id" jdbcType="INTEGER" />
     <result column="user_id" property="userId" jdbcType="INTEGER" />
@@ -14,25 +14,13 @@
   <sql id="Base_Column_List" >
     id, user_id, total, usable, cash, frozen, wait, repay
   </sql>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+  <select id="queryById" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />
     from bus_account
     where id = #{id,jdbcType=INTEGER}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
-    delete from bus_account
-    where id = #{id,jdbcType=INTEGER}
-  </delete>
   <insert id="insert" parameterType="com.shsxt.xm.api.po.BusAccount" >
-    insert into bus_account (id, user_id, total, 
-      usable, cash, frozen, 
-      wait, repay)
-    values (#{id,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{total,jdbcType=DECIMAL}, 
-      #{usable,jdbcType=DECIMAL}, #{cash,jdbcType=DECIMAL}, #{frozen,jdbcType=DECIMAL}, 
-      #{wait,jdbcType=DECIMAL}, #{repay,jdbcType=DECIMAL})
-  </insert>
-  <insert id="insertSelective" parameterType="com.shsxt.xm.api.po.BusAccount" >
     insert into bus_account
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -87,7 +75,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.shsxt.xm.api.po.BusAccount" >
+  <update id="update" parameterType="com.shsxt.xm.api.po.BusAccount" >
     update bus_account
     <set >
       <if test="userId != null" >
@@ -112,17 +100,6 @@
         repay = #{repay,jdbcType=DECIMAL},
       </if>
     </set>
-    where id = #{id,jdbcType=INTEGER}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="com.shsxt.xm.api.po.BusAccount" >
-    update bus_account
-    set user_id = #{userId,jdbcType=INTEGER},
-      total = #{total,jdbcType=DECIMAL},
-      usable = #{usable,jdbcType=DECIMAL},
-      cash = #{cash,jdbcType=DECIMAL},
-      frozen = #{frozen,jdbcType=DECIMAL},
-      wait = #{wait,jdbcType=DECIMAL},
-      repay = #{repay,jdbcType=DECIMAL}
     where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>

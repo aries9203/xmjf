@@ -41,6 +41,7 @@ public class SmsController {
 
         try {
             String code = RandomCodesUtils.createRandom(true, 4);
+           // code="8888";
             smsService.sendPhoneSms(phone,code,type);
             //当前验证码
             session.setAttribute(P2PConstant.PHONE_VERIFY_CODE+phone,code);

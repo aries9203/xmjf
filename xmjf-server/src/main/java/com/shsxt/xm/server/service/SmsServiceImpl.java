@@ -64,7 +64,7 @@ public class SmsServiceImpl implements ISmsService {
         try {
             rsp = client.execute(req);
             boolean b = rsp.isSuccess();
-            AssertUtil.isTrue(!rsp.isSuccess(),"短信发送失败");
+           AssertUtil.isTrue(!rsp.isSuccess(),"短信发送失败");
         } catch (ApiException e) {
             e.printStackTrace();
         }
